@@ -103,8 +103,8 @@ load_new_freq:
 	LOAD_WORD_TO_Y YL, YH, notaFreq
 
 	; compare Y and OCR1B
-	in temp1, OCR1BL
-	in temp2, OCR1BH
+	in temp1, OCR1AL
+	in temp2, OCR1AH
 	cp temp2, YH
 	brne set_new_freq_to_timer
 	cp temp1, YL
@@ -130,15 +130,13 @@ START:
 	ldi temp1, LOW(RAMEND)
 	out SPL, temp1
 
-	rcall SETUP_TIMER1_FAST_PWM_OUTPUTB
-
 	; PORTD 0-6 bit - input, pull-up resistor on
 	; Enable pin change interrupts on all portd
 	ldi temp1, 0x7F
 	out PORTD, temp1
 	out PCMSK2, temp1
-	; PORTB4 - output OC1B
-	ldi temp1, (1 << PORTB4)
+	; PORTB 4 - 7 - output OC1B, plus 3 bits for debug leds
+	ldi temp1, 0xF0
 	out DDRB, temp1
 	; PORTB 0 - 3 - input, pull-up resistor on
 	; Enable pin change interrupts on portb 0-3
@@ -202,8 +200,8 @@ CLEANUP_16BIN_TIMER_MODE:
 
 
 
-octavaOne:   .dw 32063, 28566, 25449, 24020, 21400, 19065, 16985
-octavaTwo:   .dw 16032, 14283, 12724, 12010, 10700,  9533,  8492
-octavaThree: .dw  8016,  7141,  6362,  6005,  5350,  4766,  4246
-octavaFour:  .dw  4008,  3571,  3181,  3003,  2675,  2383,  2123
+octavaOne:   .dw 30578, 27242, 24270, 22908, 20408, 18182, 16198
+octavaTwo:   .dw 15289, 13621, 12135, 11454, 10204,  9091,  8099
+octavaThree: .dw  7645,  6810,  6068,  5727,  5102,  4545,  4050
+octavaFour:  .dw  3822,  3405,  3034,  2863,  2551,  2273,  2025
 octavaAddrs: .dw octavaOne * 2, octavaTwo * 2, octavaThree * 2, octavaFour * 2

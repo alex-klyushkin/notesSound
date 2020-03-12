@@ -56,7 +56,7 @@
 rjmp START
 .org 11
 rjmp PORTB_PIN_CHANGE_INTERRUPT
-.org 21
+.org 20
 rjmp PORTD_PIN_CHANGE_INTERRUPT
 
 

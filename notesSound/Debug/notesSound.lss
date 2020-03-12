@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  D:\Projects\from_github\notesSound\notesSound\main.asm Fri Mar 13 00:23:29 2020
+AVRASM ver. 2.2.7  D:\Projects\from_github\notesSound\notesSound\main.asm Fri Mar 13 00:30:53 2020
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313adef.inc'
 D:\Projects\from_github\notesSound\notesSound\main.asm(10): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATtiny_DFP\1.3.229\avrasm\inc\tn2313adef.inc'
@@ -840,14 +840,14 @@ D:\Projects\from_github\notesSound\notesSound\main.asm(10): Including file 'C:/P
                                  
 000025 3017                      	cpi temp2, 7
 000026 f018                      	brlo load_new_freq
-000027 d049                      	rcall STOP_16BIT_TIMER
-000028 d04f                      	rcall CLEANUP_16BIN_TIMER_MODE
+000027 d04b                      	rcall STOP_16BIT_TIMER
+000028 d051                      	rcall CLEANUP_16BIN_TIMER_MODE
 000029 9518                      	reti
                                  
                                  load_new_freq:
 00002a 2f41                      	mov notaFreq, temp2
                                  	; load freq to Y
-00002b e300                      	ldi temp1, LOW(octavaAddrs * 2)
+00002b e304                      	ldi temp1, LOW(octavaAddrs * 2)
 00002c e011                      	ldi temp2, HIGH(octavaAddrs * 2)
 00002d 2fe0
 00002e 2ff1
@@ -892,8 +892,8 @@ D:\Projects\from_github\notesSound\notesSound\main.asm(10): Including file 'C:/P
 000051 bd19
 000052 bd08                      	SETUP_OCR1B YL, YH
                                  enable_16bit_timer:
-000053 d014                      	rcall SETUP_TIMER1_FAST_PWM_OUTPUTB
-000054 d018                      	rcall START_16BIT_TIMER_NO_PRESCALING
+000053 d016                      	rcall SETUP_TIMER1_FAST_PWM_OUTPUTB
+000054 d01a                      	rcall START_16BIT_TIMER_NO_PRESCALING
 000055 9518                      	reti
                                  
                                  
@@ -910,7 +910,7 @@ D:\Projects\from_github\notesSound\notesSound\main.asm(10): Including file 'C:/P
 000059 bb02                      	out PORTD, temp1
 00005a b905                      	out PCMSK2, temp1
                                  	; PORTB 4 - 7 - output OC1B, plus 3 bits for debug leds
-00005b ef00                      	ldi temp1, 0xF0
+00005b e100                      	ldi temp1, 0x10
 00005c bb07                      	out DDRB, temp1
                                  	; PORTB 0 - 3 - input, pull-up resistor on
                                  	; Enable pin change interrupts on portb 0-3
@@ -927,84 +927,87 @@ D:\Projects\from_github\notesSound\notesSound\main.asm(10): Including file 'C:/P
 000063 6200                      	sbr temp1, (1 << SE)
 000064 bf05                      	out MCUCR, temp1
                                  
+000065 2733                      	clr octavaNo
+000066 2744                      	clr notaFreq
+                                 
                                  	; enable global interrupt
-000065 9478                      	sei
+000067 9478                      	sei
                                  
                                  inf_loop:
-000066 9588                      	sleep
-000067 cffe                      	rjmp inf_loop
+000068 9588                      	sleep
+000069 cffe                      	rjmp inf_loop
                                  
                                  
                                  
                                  SETUP_TIMER1_FAST_PWM_OUTPUTB:
                                  	; Clear OC1B on Compare Match, set OC1B at TOP
                                  	; Fast PWM, OCR1A TOP
-000068 e203                      	ldi temp1, (1 << COM1B1 | 1 << WGM11 | 1 << WGM10)
-000069 bd0f                      	out TCCR1A, temp1
-00006a e108                      	ldi temp1, (1 << WGM13 | 1 << WGM12)
-00006b bd0e                      	out TCCR1B, temp1
-00006c 9508                      	ret
+00006a e203                      	ldi temp1, (1 << COM1B1 | 1 << WGM11 | 1 << WGM10)
+00006b bd0f                      	out TCCR1A, temp1
+00006c e108                      	ldi temp1, (1 << WGM13 | 1 << WGM12)
+00006d bd0e                      	out TCCR1B, temp1
+00006e 9508                      	ret
                                  
                                  
                                  
                                  START_16BIT_TIMER_NO_PRESCALING:
-00006d b50e                      	in temp1, TCCR1B
-00006e 6001                      	sbr temp1, (1 << CS10)
-00006f bd0e                      	out TCCR1B, temp1
-000070 9508                      	ret
+00006f b50e                      	in temp1, TCCR1B
+000070 6001                      	sbr temp1, (1 << CS10)
+000071 bd0e                      	out TCCR1B, temp1
+000072 9508                      	ret
                                  
                                  
                                  
                                  STOP_16BIT_TIMER:
-000071 b50e                      	in temp1, TCCR1B
-000072 7f08                      	cbr temp1, (1 << CS12 | 1 << CS11 | 1 << CS10)
-000073 bd0e                      	out TCCR1B, temp1
-000074 2700                      	clr temp1
-000075 bd0d                      	out TCNT1H, temp1
-000076 bd1c                      	out TCNT1L, temp2
-000077 9508                      	ret
+000073 b50e                      	in temp1, TCCR1B
+000074 7f08                      	cbr temp1, (1 << CS12 | 1 << CS11 | 1 << CS10)
+000075 bd0e                      	out TCCR1B, temp1
+000076 2700                      	clr temp1
+000077 bd0d                      	out TCNT1H, temp1
+000078 bd1c                      	out TCNT1L, temp2
+000079 9508                      	ret
                                  
                                  
                                  
                                  CLEANUP_16BIN_TIMER_MODE:
-000078 2700                      	clr temp1
-000079 bd0f                      	out TCCR1A, temp1
-00007a bd0e                      	out TCCR1B, temp1
-00007b 9508                      	ret
+00007a 2700                      	clr temp1
+00007b bd0f                      	out TCCR1A, temp1
+00007c bd0e                      	out TCCR1B, temp1
+00007d 9508                      	ret
                                  
                                  
                                  
-00007c 7772
-00007d 6a6a
-00007e 5ece
-00007f 597c
-000080 4fb8
-000081 4706
-000082 3f46                      octavaOne:   .dw 30578, 27242, 24270, 22908, 20408, 18182, 16198
-000083 3bb9
-000084 3535
-000085 2f67
-000086 2cbe
-000087 27dc
-000088 2383
-000089 1fa3                      octavaTwo:   .dw 15289, 13621, 12135, 11454, 10204,  9091,  8099
-00008a 1ddd
-00008b 1a9a
-00008c 17b4
-00008d 165f
-00008e 13ee
-00008f 11c1
-000090 0fd2                      octavaThree: .dw  7645,  6810,  6068,  5727,  5102,  4545,  4050
-000091 0eee
-000092 0d4d
-000093 0bda
-000094 0b2f
-000095 09f7
-000096 08e1
-000097 07e9                      octavaFour:  .dw  3822,  3405,  3034,  2863,  2551,  2273,  2025
-000098 00f8
-000099 0106
-00009a 0114
+00007e 7772
+00007f 6a6a
+000080 5ece
+000081 597c
+000082 4fb8
+000083 4706
+000084 3f46                      octavaOne:   .dw 30578, 27242, 24270, 22908, 20408, 18182, 16198
+000085 3bb9
+000086 3535
+000087 2f67
+000088 2cbe
+000089 27dc
+00008a 2383
+00008b 1fa3                      octavaTwo:   .dw 15289, 13621, 12135, 11454, 10204,  9091,  8099
+00008c 1ddd
+00008d 1a9a
+00008e 17b4
+00008f 165f
+000090 13ee
+000091 11c1
+000092 0fd2                      octavaThree: .dw  7645,  6810,  6068,  5727,  5102,  4545,  4050
+000093 0eee
+000094 0d4d
+000095 0bda
+000096 0b2f
+000097 09f7
+000098 08e1
+000099 07e9                      octavaFour:  .dw  3822,  3405,  3034,  2863,  2551,  2273,  2025
+00009a 00fc
+00009b 010a
+00009c 0118
 
 
 RESOURCE USE INFORMATION
@@ -1024,7 +1027,7 @@ counted separately from r26..r31 here.
 "ATtiny2313A" register use summary:
 x  :   0 y  :   0 z  :   4 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  48 r17:  23 r18:   0 r19:   2 r20:   2 
+r13:   0 r14:   0 r15:   0 r16:  48 r17:  23 r18:   0 r19:   3 r20:   3 
 r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   7 
 r29:   7 r30:   4 r31:   4 
 Registers used: 9 out of 35 (25.7%)
@@ -1036,7 +1039,7 @@ brcc  :   0 brcs  :   2 break :   0 breq  :   0 brge  :   0 brhc  :   0
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   1 brlt  :   0 brmi  :   0 
 brne  :   2 brpl  :   0 brsh  :   1 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 cbi   :   0 cbr   :   1 clc   :   3 
-clh   :   0 cli   :   0 cln   :   0 clr   :   6 cls   :   0 clt   :   0 
+clh   :   0 cli   :   0 cln   :   0 clr   :   8 cls   :   0 clt   :   0 
 clv   :   0 clz   :   0 com   :   0 cp    :   2 cpc   :   0 cpi   :   2 
 cpse  :   0 dec   :   2 eor   :   0 icall :   0 ijmp  :   0 in    :   7 
 inc   :   2 ld    :   0 ldd   :   0 ldi   :   9 lds   :   0 lpm   :   6 
@@ -1053,7 +1056,7 @@ Instructions used: 27 out of 105 (25.7%)
 "ATtiny2313A" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000138    212     64    276    2048  13.5%
+[.cseg] 0x000000 0x00013c    216     64    280    2048  13.7%
 [.dseg] 0x000060 0x000060      0      0      0     128   0.0%
 [.eseg] 0x000000 0x000000      0      0      0     128   0.0%
 

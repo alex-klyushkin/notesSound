@@ -29,17 +29,17 @@
   <exit_portb_pin_change><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>77</LINE></exit_portb_pin_change>
   <counting_cycle_portd><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>85</LINE></counting_cycle_portd>
   <load_new_freq><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>97</LINE></load_new_freq>
-  <STOP_16BIT_TIMER><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>184</LINE></STOP_16BIT_TIMER>
-  <CLEANUP_16BIN_TIMER_MODE><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>195</LINE></CLEANUP_16BIN_TIMER_MODE>
-  <octavaAddrs><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>207</LINE></octavaAddrs>
+  <STOP_16BIT_TIMER><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>187</LINE></STOP_16BIT_TIMER>
+  <CLEANUP_16BIN_TIMER_MODE><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>198</LINE></CLEANUP_16BIN_TIMER_MODE>
+  <octavaAddrs><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>210</LINE></octavaAddrs>
   <set_new_freq_to_timer><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>114</LINE></set_new_freq_to_timer>
   <enable_16bit_timer><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>120</LINE></enable_16bit_timer>
-  <SETUP_TIMER1_FAST_PWM_OUTPUTB><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>165</LINE></SETUP_TIMER1_FAST_PWM_OUTPUTB>
-  <START_16BIT_TIMER_NO_PRESCALING><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>176</LINE></START_16BIT_TIMER_NO_PRESCALING>
-  <inf_loop><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>159</LINE></inf_loop>
-  <octavaOne><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>203</LINE></octavaOne>
-  <octavaTwo><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>204</LINE></octavaTwo>
-  <octavaThree><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>205</LINE></octavaThree>
-  <octavaFour><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>206</LINE></octavaFour>
+  <SETUP_TIMER1_FAST_PWM_OUTPUTB><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>168</LINE></SETUP_TIMER1_FAST_PWM_OUTPUTB>
+  <START_16BIT_TIMER_NO_PRESCALING><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>179</LINE></START_16BIT_TIMER_NO_PRESCALING>
+  <inf_loop><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>162</LINE></inf_loop>
+  <octavaOne><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>206</LINE></octavaOne>
+  <octavaTwo><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>207</LINE></octavaTwo>
+  <octavaThree><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>208</LINE></octavaThree>
+  <octavaFour><FILE>D:\Projects\from_github\notesSound\notesSound\main.asm</FILE><LINE>209</LINE></octavaFour>
  </LABELS>
 </ASSEMBLER_INFO>

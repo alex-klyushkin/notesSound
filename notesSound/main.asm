@@ -136,7 +136,7 @@ START:
 	out PORTD, temp1
 	out PCMSK2, temp1
 	; PORTB 4 - 7 - output OC1B, plus 3 bits for debug leds
-	ldi temp1, 0xF0
+	ldi temp1, 0x10
 	out DDRB, temp1
 	; PORTB 0 - 3 - input, pull-up resistor on
 	; Enable pin change interrupts on portb 0-3
@@ -152,6 +152,9 @@ START:
 	in temp1, MCUCR
 	sbr temp1, (1 << SE)
 	out MCUCR, temp1
+
+	clr octavaNo
+	clr notaFreq
 
 	; enable global interrupt
 	sei
